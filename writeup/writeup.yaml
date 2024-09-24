@@ -1,0 +1,24 @@
+--- !Manifest
+course: m22-foundation-data-science
+module: ope-problem-representation
+sections:
+  - !Section
+    type: writeup
+    title: Introduction
+    file: writeup/000_introduction.md
+    id:
+  - !Section
+    type: writeup
+    title: Pre-OPE Quiz
+    file: writeup/010_pretest.md
+    id:
+  - !Section
+    type: writeup
+    title: Tutorial
+    file: writeup/020_tutorial.md
+    id:
+  - !Section
+    type: writeup
+    title: Post-OPE Quiz
+    file: writeup/030_posttest.md
+    id:

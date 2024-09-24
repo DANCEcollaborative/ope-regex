@@ -1,0 +1,187 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>edu.cmu.scs.cc.project</groupId>
+  <artifactId>sample-grader</artifactId>
+  <version>1.0.0-RELEASE</version>
+  <properties>
+    <package.mainClass>edu.cmu.scs.cc.project.example.Grader
+    </package.mainClass>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/properties-maven-plugin -->
+    <dependency>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>properties-maven-plugin</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Cloud Computing Self-developed libraries
+
+    Maven remote repository:
+    https://dev.azure.com/sailplatform/Autograding/_packaging?_a=feed&feed=sailplatform
+
+    Refer to the manual to
+    configure your local Maven settings.xml to access Azure Artifacts Maven Repository.
+    -->
+    <dependency>
+      <groupId>edu.cmu.scs.cc.grader</groupId>
+      <artifactId>grader-utils</artifactId>
+      <version>20201216.1</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>*</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources-filtered</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <minimizeJar>false</minimizeJar>
+              <transformers>
+                <transformer
+                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <!--DO NOT FORGET PACKAGE NAME-->
+                  <mainClass>${package.mainClass}</mainClass>
+                </transformer>
+              </transformers>
+              <finalName>java_grader</finalName>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!--
+      CI/CD: Read pom.xml configurations from secret properties file
+      http://amrsalah.tech/mwcwp/maven-properties-file/
+
+      `mvn initialize` to read properties
+      -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>properties-maven-plugin</artifactId>
+        <version>1.0.0</version>
+      </plugin>
+      <!-- Add build timestamp with TimeZone support -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <id>timestamp-property</id>
+            <goals>
+              <goal>timestamp-property</goal>
+            </goals>
+            <configuration>
+              <name>build.time</name>
+              <pattern>yyyy-MM-dd hh:mm aa</pattern>
+              <locale>en_US</locale>
+              <timeZone>America/New_York</timeZone>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>copy-docker-resources</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/docker
+              </outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/docker</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <!--
+  Maven will resolve plugin dependencies using the configured pluginRepository.
+  Other artifact dependencies are resolved using repository.
+  The pluginRepository section is required to use upload-grader-maven-plugin for AGSv1.
+  -->
+  <pluginRepositories>
+    <pluginRepository>
+         <id>sailplatform@Local</id>
+         <url>https://pkgs.dev.azure.com/sailplatform/_packaging/sailplatform%40Local/maven/v1</url>
+         <releases>
+            <enabled>true</enabled>
+         </releases>
+         <snapshots>
+            <enabled>true</enabled>
+         </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+  <repositories>
+    <repository>
+      <id>sailplatform</id>
+      <url>https://pkgs.dev.azure.com/sailplatform/_packaging/sailplatform/maven/v1</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <distributionManagement>
+    <repository>
+      <id>sailplatform</id>
+      <url>https://pkgs.dev.azure.com/sailplatform/_packaging/sailplatform/maven/v1</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </distributionManagement>
+  </project>

@@ -1,0 +1,13 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      https://maven.apache.org/xsd/settings-1.0.0.xsd">
+<servers>
+    <server>
+      <id>sailplatform</id>
+      <username>sailplatform</username>
+       <!-- READ ONLY TOKEN. Expires on 9/25/2023
+         TODO: regenerate the token and use GitHub Secrets
+       -->
+      <!-- <password></password> -->
+    </server>
+</servers>
+</settings>
