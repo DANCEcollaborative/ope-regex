@@ -28,7 +28,7 @@ class LocalGradingService(grading_pb2_grpc.GraderServicer):
     try:
       fn = grading_utils.string_to_function(code, task)
     except Exception as e:
-      return grading_pb2.Response(response=f'Error: {str(e)}')
+      return grading_pb2.Response(response=f'Error in grading_server.py: {str(e)}')
     pass_task, feedback = self.localGrader.grade(task, fn)
     logger.debug(f'[DEBUG][LocalGradingService]: result is {pass_task}. Feedback is {feedback}')
     if pass_task:
