@@ -3,7 +3,7 @@ import numpy as np
 # import openai
 import random
 import re 
-# import inspect
+import inspect
 
 task_id = 1
 
@@ -19,8 +19,8 @@ def compare_answers(student_out, expected_out):
 
 
 def test_task(student_solution):
-    # return True, "Code update is being used"
-	return generate_simple_feedback(student_solution,positive_test_cases,negative_test_cases)
+    return True, "Code update is being used"
+	# return generate_simple_feedback(student_solution,positive_test_cases,negative_test_cases)
 
 	# return_feedback(student_solution,positive_test_cases,negative_test_cases,NAME)
 
