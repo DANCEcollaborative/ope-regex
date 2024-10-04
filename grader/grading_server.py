@@ -25,7 +25,7 @@ class LocalGradingService(grading_pb2_grpc.GraderServicer):
     task = request.task
     logger.debug(f'[DEBUG][LocalGradingService]: Call Grade {task}')
     code = grading_utils.extract_task_n_code(f'workspace/workspace.ipynb', task)
-    return grading_pb2.Response(response=f'grading_server.py, code: " {code}')
+    # return grading_pb2.Response(response=f'grading_server.py, code: " {code}')
     # return code
     try:
       fn = grading_utils.string_to_function(code, task)
