@@ -15,7 +15,7 @@ def compare_answers(student_out, expected_out):
 
 
 def test_task(student_solution):
-    return "Code update is being used"
+    return true, "Code update is being used"
 	# return_feedback(student_solution,positive_test_cases,negative_test_cases,NAME)
 
 	# np.random.seed(0)
