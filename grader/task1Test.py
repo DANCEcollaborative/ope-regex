@@ -1,6 +1,6 @@
 from test_utility import *
 import numpy as np
-# import openai
+import openai
 import random
 import re 
 import inspect
@@ -21,7 +21,8 @@ def compare_answers(student_out, expected_out):
 def test_task(student_solution):
     # return True, "Code update is being used"
     student_regex = student_solution()
-    return generate_simple_feedback(student_regex,positive_test_cases,negative_test_cases)
+    # return generate_simple_feedback(student_regex,positive_test_cases,negative_test_cases)
+    return return_feedback(student_regex,positive_test_cases,negative_test_cases)
 
 	# return_feedback(student_solution,positive_test_cases,negative_test_cases,NAME)
 
@@ -170,7 +171,7 @@ def return_feedback(compiled_regex,positive_test_cases,negative_test_cases,stude
     messages=build_prompt(prompt_string,student_name)
     )
     llm_response = response.choices[0].message.content
-    return llm_response
+    return True, llm_response
 
 def return_feedback_split(split_recipes,NAME):
     is_correct,prompt_string = test_split_function(split_recipes)
