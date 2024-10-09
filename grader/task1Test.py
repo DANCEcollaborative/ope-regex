@@ -1,6 +1,6 @@
 from test_utility import *
 import numpy as np
-# import openai
+import openai
 import random
 import re 
 import inspect
