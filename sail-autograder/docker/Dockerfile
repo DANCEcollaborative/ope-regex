@@ -13,7 +13,6 @@ RUN apt-get update && apt-get install -y python3-pip
 COPY src/main/resources/requirements.txt .
 RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
-RUN pip3 install openai
 
 # add the grader executable and resources to the docker image.
 ADD target/java_grader.jar /grader/java_grader.jar

@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 
 # Install pandas, numpy and scipy
 RUN pip install --no-cache-dir pandas numpy scipy
-RUN pip install grpcio-tools nbformat cffi requests cryptography
+RUN pip install grpcio-tools nbformat cffi requests cryptography openai
 
 COPY grader /grader/
 COPY grading /lib/grading/
