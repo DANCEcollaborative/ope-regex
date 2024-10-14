@@ -32,7 +32,7 @@ def task1_correct_regex():
 # you shouldn't need to modify thie
 def test_task(student_solution):
     # return True, "Code update is being used"
-    student_regex = student_solution
+    student_regex = student_solution()
     return generate_simple_feedback(student_regex,positive_test_cases,negative_test_cases)
 
 def generate_simple_feedback(compiled_expression,positive_test_cases,negative_test_cases):
