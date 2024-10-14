@@ -11,22 +11,21 @@ import inspect
 # positive_test_cases, negative_test_cases
 #
 # task_id = 
-task_id = 2
+task_id = 1
 
 # positive test cases 
 # negative test cases
+positive_test_cases=['2 hours','4-5 hours','1 hour','2-3 hours','1 HOUR','24 hours']
+negative_test_cases=['Overnight','Hour','two']
 
-positive_test_cases=['1.5 hours','3.5-4.5 Hours']
-negative_test_cases=['Overnight','Hour','two','1 hour']
 # implement both a correct and an incorrect solution
-def task2_incorrect():
+def task1_incorrect_regex():
 
     return re.compile(r'\s*hours?\b', re.IGNORECASE)
 
 # correct solution
-def task2_correct():
-    return re.compile(r'\b\d+\.\d+(?:\s*-\s*\d+\.\d+)?\s*hours?\b', re.IGNORECASE)
-    #return re.compile(r'(?<!\S)\d{1,2}(?:-\d{1,2})?\s*hours?\b', re.IGNORECASE)
+def task1_correct_regex():
+    return re.compile(r'(?<!\S)\d{1,2}(?:-\d{1,2})?\s*hours?\b', re.IGNORECASE)
 # this will test your feedback - if you are testing for 
 # a wider range of errors, you need more test cases
 
