@@ -16,7 +16,7 @@ class LocalGrader:
   def __init__(self) -> None:
     self.feedbacks = {}
     self.test_function_map = {
-      'task1a': task1aTest.test_task,
+      'task11': task11Test.test_task,
       'task2': task2Test.test_task,
       'task3': task3Test.test_task,
       'task4': task4Test.test_task
