@@ -1,41 +1,101 @@
-from test_utility import *
-from datetime import datetime
-import traceback
-import numpy as np
 
+import random
+import re 
+import inspect
+
+# this is a stub of a function-tester
+
+
+recipe_text = r'''
+Recipe 1: 194_Cabbage_Kielbara_Supper
+1) In a 5-qt. slow cooker, combine the cabbage, potatoes, onion, salt and pepper.
+2) Pour broth over all for 2 HOURS.
+3) Place sausage on top (slow cooker will be full, but cabbage will cook down).
+4) Cover and cook on low for 4-5 hours or until vegetables are tender and sausage is heated through.
+Recipe 2: 195_Chocolate_Chip_Cookie_Ice_Cream_Cake
+1) Crush half the cookies (about 20 cookies) to make crumbs.
+2) Combine crumbs with melted margarine and press into the bottom of a 9-inch springform pan or pie plate.
+3) Stand remaining cookies around edge of pan.
+4) Spread 3/4 cup fudge topping over crust.
+5) Freeze 1.5 hours.
+6) Meanwhile, soften 1 quart of ice cream in microwave or on countertop.
+7) After crust has chilled, spread softened ice cream over fudge layer.
+8) Freeze 30 minutes.
+9) Scoop remaining quart of ice cream into balls and arrange over spread ice cream layer.
+10) Freeze until firm, 3.5-4.5 Hours.
+11) To serve, garnish with remainder of fudge topping, whipped cream and cherries.'''
+
+# task_id = 
 task_id = 4
 
-def solution(X):
-	m, n = X.shape
-	mask = np.add.outer(np.arange(m), np.arange(n)) % 3 == 0
-	return (X * mask).sum()
+def task4_correct():
+    decimal_hour_pattern = re.compile(r'\b\d+\.\d+(?:\s*-\s*\d+\.\d+)?\s*hours?\b', re.IGNORECASE)
+   # re.compile(r'(?<!\S)\d{1,2}(?:-\d{1,2})?\s*hours?\b', re.IGNORECASE)
+    #integer_hour_pattern = re.compile(r'hours?', re.IGNORECASE)
+    matches = decimal_hour_pattern.findall(recipe_text)
+    return matches 
+
+def task4_incorrect():
+
+    integer_hour_pattern = re.compile(r'2 Hours', re.IGNORECASE)
+    matches = integer_hour_pattern.findall(recipe_text)
+    print(matches)
+    return matches 
 
 
-def compare_answers(student_out, expected_out):
-	return student_out == expected_out
+def task4_incorrect_ii():
+
+    integer_hour_pattern = re.compile(r'5 hours', re.IGNORECASE)
+    matches = integer_hour_pattern.findall(recipe_text)
+    print(matches)
+    return matches 
+
+# you shouldn't need to modify this
+def test_task(student_solution):
+    student_result = student_solution()
+    return generate_simple_feedback(student_result)
+
+# def generate_simple_feedback(student_result,test_input):
+def generate_simple_feedback(student_result):
+    '''
+    notice that the feedback is a tuple 
+    telling us if they passed or failed the test(s)
+    and generating some simple feedback if they failed
+
+    '''
+    
+    matches = student_result
+   
+    pos_examples=['2 hours','4-5 hours','1 hour','2-3 hours','1 HOUR','24 hours']
+    neg_examples=['Overnight','Hour','two']
+    return test_matches(matches,pos_examples,neg_examples)
 
 
-def test_task(subset_sum):
-	np.random.seed(333)
+def test_matches(matches,pos_examples,neg_examples):
+    #
+    # this is an example of code written to test a 'specific' function
+    #
+    # you should find ALL of the things in positive match
+    # (across the entire document)
+    # and none of the things in negative match
+    pos_match = set(pos_examples)
+    neg_match = set(neg_examples)
 
-	X = np.random.randint(low = 1, high = 10, size = (3, 5)).astype(float)
-	pass1, feedback1 = test_correctness_and_efficiency(
-		subset_sum, solution, compare_answers,
-		1, f"Input: X = {X}", 0.0, X
-	)
+    if set(matches)==set(pos_match) and len(set(matches).intersection(set(neg_match)))==0:
+        return True,[]
+    else:
+        incorrectly_matched=set(matches)-set(pos_match)
+        #not_detected = set(matches).intersection(neg_match)
+        
+        overmatches = set(matches).intersection(neg_examples)
 
-	X = np.random.randint(low = 1, high = 20, size = (1000, 5000)).astype(float)
-	pass2, feedback2 = test_correctness_and_efficiency(
-		subset_sum, solution, compare_answers,
-		2, f"Input: X = {X}", 4.0, X
-	)
-
-	if pass1 and pass2:
-		record_success(task_id)
-	else:
-		record_fail(task_id)
-
-	record_end(task_id)
-	return pass1 and pass2, feedback1 + "\n" + feedback2
-
-
+        mistakes=[] # list of mismatches
+        # note you cannot return False,[]
+        # by construction, as an empty list already returns
+        for id in incorrectly_matched:
+            mistakes.append(f'incorrectly detected: {id}')
+        for om in overmatches:
+            mistakes.append(f'incorrectly matched: {om}')
+        return False,mistakes
+        
+    
