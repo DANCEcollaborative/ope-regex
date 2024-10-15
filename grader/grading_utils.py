@@ -6,8 +6,16 @@ def is_task_n(task: str):
       return False
     if len(cell['metadata']['tags']) <= 0:
       return False
-    return cell['cell_type'] == 'code' and cell['metadata']['tags'][0] == task
+    # so that it works with cells that have multiple tags
+    return cell['cell_type'] == 'code' and task in cell['metadata']['tags']
   return is_target_task
+
+def is_dev_cell(cell):
+    if not 'tags' in cell['metadata'].keys():
+        return False
+    if len(cell['metadata']['tags']) <= 0:
+        return False
+    return 'dev' in cell['metadata']['tags']
 
 def extract_task_n_code(nbPath:str, taskTag: str) -> str:
   lines = []
@@ -37,8 +45,11 @@ def release(task: str):
   with open(target_path) as f:
     target_nb = nbf.read(f, as_version=4)
 
-  # Append cells of the source notebook to the target
-  target_nb.cells.extend(source_nb.cells)
+  # Append cells of the source notebook to the target; exclude cells tagged with 'dev'
+  for cell in source_nb.cells:
+    if is_dev_cell(cell):
+      continue
+    target_nb.cells.append(cell)
 
   # Write the combined notebook back to the first file
   with open(target_path, 'w') as f:
