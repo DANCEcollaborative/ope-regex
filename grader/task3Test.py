@@ -1,44 +1,71 @@
 from test_utility import *
-from datetime import datetime
-import traceback
 import numpy as np
 
+import random
+import re 
+import inspect
+
+
+# To update for a new task, you only need to update:
+# task_id
+# positive_test_cases, negative_test_cases
+#
+# task_id = 
 task_id = 3
 
-def solution(H, y):
-	n = len(y)
-	return -np.log(H[np.arange(n), y]).sum() / n
+# positive test cases 
+# negative test cases
 
+positive_test_cases=['1.5 hours','3.5-4.5 Hours']
+negative_test_cases=['Overnight','Hour','two','1 hour']
+# implement both a correct and an incorrect solution
+def task3_incorrect_regex():
 
-def compare_answers(student_out, expected_out):
-	return student_out == expected_out
+    return re.compile(r'\s*hours?\b', re.IGNORECASE)
 
+# correct solution
+def task3_correct_regex():
+    return re.compile(r'\b\d+\.\d+(?:\s*-\s*\d+\.\d+)?\s*hours?\b', re.IGNORECASE) 
+    #re.compile(r'(?<!\S)\d{1,2}(?:-\d{1,2})?\s*hours?\b', re.IGNORECASE)
+# this will test your feedback - if you are testing for 
+# a wider range of errors, you need more test cases
 
-def test_task(logistic_loss):
-	np.random.seed(42)
+# you shouldn't need to modify thie
+def test_task(student_solution):
+    # return True, "Code update is being used"
+    student_regex = student_solution()
+    return generate_simple_feedback(student_regex,positive_test_cases,negative_test_cases)
 
-	H = np.array([[0.1, 0.1, 0.5, 0.2, 0.1], [0.2, 0.2, 0.2, 0.2, 0.2], [0.1, 0.2, 0.3, 0.2, 0.2]])
-	y = np.random.choice(np.arange(H.shape[1]), size = H.shape[0])
-	pass1, feedback1 = test_correctness_and_efficiency(
-		logistic_loss, solution, compare_answers,
-		1, f"Input: H = {H}, y = {y}", 0.0, H, y
-	)
+def generate_simple_feedback(compiled_expression,positive_test_cases,negative_test_cases):
+    '''
+    notice that the feedback is a tuple 
+    telling us if they passed or failed the test(s)
 
-	H = np.random.randint(low = 1, high = 100, size = (1000, 5)).astype(float)
-	H /= H.sum(axis = 1)[:,None]
-	y = np.random.choice(np.arange(H.shape[1]), size = H.shape[0])
-	pass2, feedback2 = test_correctness_and_efficiency(
-		logistic_loss, solution, compare_answers,
-		2, f"Input: H = {H}, y = {y}", 20.0, H, y
-	)
+    and generating some simple feedback if they failed
 
-	if pass1 and pass2:
-		record_success(task_id)
-	else:
-		record_fail(task_id)
+    '''
+    # status_string = f'''The student entered '{compiled_expression.pattern}'.'''
 
-	record_end(task_id)
-	return pass1 and pass2, feedback1 + "\n" + feedback2
-
-
-
+    #tudents_expression = re.compile(expression)
+    pos_match=True
+    neg_match=False
+    
+    unmatched=[]
+    incorrectly_matched=[]
+    # check correctness 
+    for pos_example in positive_test_cases:
+        if not(compiled_expression.match(pos_example)):
+            pos_match=False
+            unmatched.append(pos_example)
+            
+    for neg_example in negative_test_cases:
+        if compiled_expression.match(neg_example):
+            neg_match=True
+            incorrectly_matched.append(neg_example)
+            
+    if pos_match and not(neg_match):
+        return(True, "Congratulations! You have correctly completed the regular expression.")
+    elif pos_match and neg_match:
+        return(False, f"The student matches too many things. For example you matched {random.choice(incorrectly_matched)} but should not have.")
+    elif not pos_match:
+        return(False, f"The student does not match the positive cases. For example you did not match {random.choice(unmatched)}.")
