@@ -8,26 +8,26 @@ import inspect
 # task_id = 
 task_id = 2
 
-# def task1b_correct(x):
-#     integer_hour_pattern = re.compile(r'(?<!\S)\d{1,2}(?:-\d{1,2})?\s*hours?\b', re.IGNORECASE)
-#     #integer_hour_pattern = re.compile(r'hours?', re.IGNORECASE)
-#     matches = integer_hour_pattern.findall(x)
-#     return matches 
-# 
-# def task1b_incorrect(x):
-# 
-#     integer_hour_pattern = re.compile(r'2 Hours', re.IGNORECASE)
-#     matches = integer_hour_pattern.findall(x)
-#     print(matches)
-#     return matches 
-# 
-# 
-# def task1b_incorrect_ii(x):
-# 
-#     integer_hour_pattern = re.compile(r'5 hours', re.IGNORECASE)
-#     matches = integer_hour_pattern.findall(x)
-#     print(matches)
-#     return matches 
+def task2_correct(x):
+    integer_hour_pattern = re.compile(r'(?<!\S)\d{1,2}(?:-\d{1,2})?\s*hours?\b', re.IGNORECASE)
+    #integer_hour_pattern = re.compile(r'hours?', re.IGNORECASE)
+    matches = integer_hour_pattern.findall(x)
+    return matches 
+
+def task2_incorrect(x):
+
+    integer_hour_pattern = re.compile(r'2 Hours', re.IGNORECASE)
+    matches = integer_hour_pattern.findall(x)
+    print(matches)
+    return matches 
+
+
+def task1b_incorrect_ii(x):
+
+    integer_hour_pattern = re.compile(r'5 hours', re.IGNORECASE)
+    matches = integer_hour_pattern.findall(x)
+    print(matches)
+    return matches 
 
 # you shouldn't need to modify this
 def test_task(student_solution):
