@@ -39,7 +39,7 @@ def task4_incorrect():
 
     integer_hour_pattern = re.compile(r'2 Hours', re.IGNORECASE)
     matches = integer_hour_pattern.findall(recipe_text)
-    print(matches)
+ 
     return matches 
 
 
@@ -47,7 +47,7 @@ def task4_incorrect_ii():
 
     integer_hour_pattern = re.compile(r'5 hours', re.IGNORECASE)
     matches = integer_hour_pattern.findall(recipe_text)
-    print(matches)
+
     return matches 
 
 # you shouldn't need to modify this
@@ -66,8 +66,8 @@ def generate_simple_feedback(student_result):
     
     matches = student_result
    
-    pos_examples=['2 hours','4-5 hours','1 hour','2-3 hours','1 HOUR','24 hours']
-    neg_examples=['Overnight','Hour','two']
+    pos_examples=['1.5 hours','3.5-4.5 Hours']
+    neg_examples=['Overnight','Hour','two','1 hour']
     return test_matches(matches,pos_examples,neg_examples)
 
 
