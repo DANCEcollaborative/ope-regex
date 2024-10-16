@@ -20,12 +20,12 @@ positive_test_cases=['Recipe 3:','Recipe 99:']
 negative_test_cases=['Recipe by itself',
                      'Recipe 5 but no colon']
 # implement both a correct and an incorrect solution
-def task3a_incorrect():
+def task5_incorrect():
 
     return re.compile(r'Recipe', re.IGNORECASE)
 
 # correct solution
-def task3a_correct():
+def task5_correct():
     return re.compile(r'(?=Recipe \d+:)')
     #\b\d+\.\d+(?:\s*-\s*\d+\.\d+)?\s*hours?\b', re.IGNORECASE)
     #return re.compile(r'(?<!\S)\d{1,2}(?:-\d{1,2})?\s*hours?\b', re.IGNORECASE)
@@ -33,9 +33,9 @@ def task3a_correct():
 # a wider range of errors, you need more test cases
 
 # you shouldn't need to modify thie
-def test_task3a(student_solution):
+def test_task(student_solution):
     # return True, "Code update is being used"
-    student_regex = student_solution
+    student_regex = student_solution()
     return generate_simple_feedback(student_regex,positive_test_cases,negative_test_cases)
 
 def generate_simple_feedback(compiled_expression,positive_test_cases,negative_test_cases):
