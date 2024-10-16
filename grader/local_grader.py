@@ -19,7 +19,11 @@ class LocalGrader:
       'task1': task1Test.test_task,
       'task2': task2Test.test_task,
       'task3': task3Test.test_task,
-      'task4': task4Test.test_task
+      'task4': task4Test.test_task,
+      'task5': task5Test.test_task,
+      'task6': task6Test.test_task,
+      'task7': task7Test.test_task,
+      'task8': task8Test.test_task
     }
     self.result = {
       task_tag : 0
