@@ -46,32 +46,35 @@ Recipe 4: 195_Chocolate_Chip_Cookie_Ice_Cream_Cake
 10) Freeze until firm, 3.5-4.5 Hours.
 11) To serve, garnish with remainder of fudge topping, whipped cream and cherries.
 '''
-
 # task_id = 
 task_id = 6
 
-task6_pattern=re.compile(r'(?=Recipe \d+:)')
+def apply_student_regex_to_text(student_regex,recipe_text):
+
+    srt = re.split(student_regex, recipe_text.strip())
+    return [s for s in srt if s]
 
 def task6_correct():
-    #recipe_text,regex_to_use = task6_pattern):
-    srt = re.split(task6_pattern, recipe_text_B.strip())
-    return [s for s in srt if s]
+    return re.compile(r'(?=Recipe \d+:)')
 
 def task6_incorrect():
-    #recipe_text,regex_to_use):
-    srt = re.split(task6_pattern, recipe_text_B.strip())
-    return [s for s in srt if s]
+   return re.compile(r'Recipe')
 
 # you shouldn't need to modify this
 def test_task(student_solution):
     student_result = student_solution()
     return generate_simple_feedback(student_result)
 
-def generate_simple_feedback(strings_to_evaluate):
+# this is different than in earlier tasks
+# because it generates more comprehensive
+# feedback 
+
+def generate_simple_feedback(student_regex):
     
     feedback_prompt=[]
     is_Correct=True
 
+    strings_to_evaluate = apply_student_regex_to_text(student_regex,recipe_text_B)
     # make sure you are splitting
     if len(strings_to_evaluate)==1:
         feedback_prompt.append('The function only returned one string, make sure you are using the right method to split.')
@@ -81,21 +84,19 @@ def generate_simple_feedback(strings_to_evaluate):
     else:
         feedback_prompt.append('The function returned an incorrect number of recipes.')
         is_Correct = False
-    # make sure you don't lose the recipe
-    for recipe in strings_to_evaluate:
-        if re.search("Recipe",recipe):
-            pass
-        else:
-            feedback_prompt.append('The recipe does not start with recipe, did you remove it when you split?')
-            is_Correct = False
-    
     if re.search('browned.$',strings_to_evaluate[0]):
         feedback_prompt.append('The first recipe includes the correct ending.')
         is_Correct = True
     else:
         feedback_prompt.append('The end of the first recipe is not correct.')
         is_Correct = False
-
+    # make sure you don't lose the recipe
+    for recipe,n in zip(strings_to_evaluate,range(0,len(strings_to_evaluate))):
+        if re.search("Recipe",recipe):
+            pass
+        else:
+            feedback_prompt.append(f'Recipe {n}  does not start with the word "Recipe", did you remove it when you split?')
+            is_Correct = False
     if is_Correct:
         feedback_prompt.append("The student's solution is correct. Write some test(s)")
         
