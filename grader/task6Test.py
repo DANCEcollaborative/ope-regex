@@ -55,7 +55,8 @@ def apply_student_regex_to_text(student_regex,recipe_text):
     return [s for s in srt if s]
 
 def task6_correct():
-    return re.compile(r'(?=Recipe \d+:)')
+    recipe_pattern_lookahead = re.compile(r'(?=Recipe \d+:)')
+    return recipe_pattern_lookahead
 
 def task6_incorrect():
    return re.compile(r'Recipe')
