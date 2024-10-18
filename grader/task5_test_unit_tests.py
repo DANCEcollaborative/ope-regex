@@ -14,14 +14,14 @@ def main():
     # compile regular expression object?
     print(os.getcwd())
     print("This is the main function.")
-    simple_feedback = test_task(task5_correct())
+    simple_feedback = test_task(task5_correct)
     if simple_feedback[0]:
         print('correct solution passed test')
     else:
         print('correct solution failed test (incorrectly)')
     print('tested with correct solution:')
     print(simple_feedback)
-    simple_feedback = test_task(task5_incorrect())
+    simple_feedback = test_task(task5_incorrect)
     print('tested with incorrect solution:')
     print(simple_feedback)
 
