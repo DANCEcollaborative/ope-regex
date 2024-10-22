@@ -15,7 +15,7 @@ task_id = 1
 
 # positive test cases 
 # negative test cases
-positive_test_cases=[' 2 hours',' 4-5 hours',' 1 hour',' 2-3 hours',' 1 HOUR',' 24 hours']
+positive_test_cases=['2 hours','4-5 hours','1 hour','2-3 hours','1 HOUR','24 hours']
 negative_test_cases=['Overnight','Hour','two']
 
 # implement both a correct and an incorrect solution
@@ -25,7 +25,8 @@ def task1_incorrect_regex():
 
 # correct solution
 def task1_correct_regex():
-    return  re.compile(r'\s[0-9]+(\-[0-9]+)?\shours?', re.IGNORECASE)
+    return re.compile(r'[0-9]+(\-[0-9]+)?\shours?', re.IGNORECASE)
+    #return  re.compile(r'\s[0-9]+(\-[0-9]+)?\shours?', re.IGNORECASE)
     #return re.compile(r'([0-9].*\-)?[0-9]+\s*hours?', re.IGNORECASE)
     #return re.compile(r'(?<!\S)\d{1,2}(?:-\d{1,2})?\s*hours?\b', re.IGNORECASE)
 # this will test your feedback - if you are testing for 
@@ -55,15 +56,16 @@ def generate_simple_feedback(compiled_expression,positive_test_cases,negative_te
     incorrectly_matched=[]
     # check correctness 
     for pos_example in positive_test_cases:
+
         if not(compiled_expression.match(pos_example)):
             pos_match=False
             unmatched.append(pos_example)
-            
+
     for neg_example in negative_test_cases:
         if compiled_expression.match(neg_example):
             neg_match=True
             incorrectly_matched.append(neg_example)
-            
+
     if pos_match and not(neg_match):
         return(True, "Congratulations! You have correctly completed the regular expression.")
     elif pos_match and neg_match:
