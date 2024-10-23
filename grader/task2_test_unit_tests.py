@@ -20,9 +20,5 @@ def main():
     print('tested with incorrect solution:')
     print(simple_feedback)
 
-    simple_feedback = test_task(task2_incorrect_ii)
-    print('tested with incorrect solution:')
-    print(simple_feedback)
-
 if __name__ == "__main__":
     main()

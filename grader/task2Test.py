@@ -29,7 +29,11 @@ Recipe 2: 195_Chocolate_Chip_Cookie_Ice_Cream_Cake
 task_id = 2
 
 def task2_correct():
-    integer_hour_pattern = re.compile(r'(?<!\S)\d{1,2}(?:-\d{1,2})?\s*hours?\b', re.IGNORECASE)
+    integer_hour_pattern = re.compile(r'\s[0-9]+(?:\-[0-9]+)?\shours?', re.IGNORECASE)
+    # NOTE you modified this from task1 solution
+    # by adding a non-capturing group
+    
+    #integer_hour_pattern = re.compile(r'(?<!\S)\d{1,2}(?:-\d{1,2})?\s*hours?\b', re.IGNORECASE)
     #integer_hour_pattern = re.compile(r'hours?', re.IGNORECASE)
     matches = integer_hour_pattern.findall(recipe_text)
     return matches 
@@ -41,13 +45,6 @@ def task2_incorrect():
     print(matches)
     return matches 
 
-
-def task2_incorrect_ii():
-
-    integer_hour_pattern = re.compile(r'5 hours', re.IGNORECASE)
-    matches = integer_hour_pattern.findall(recipe_text)
-    print(matches)
-    return matches 
 
 # you shouldn't need to modify this
 def test_task(student_solution):
@@ -64,7 +61,7 @@ def generate_simple_feedback(student_result):
     '''
     
     matches = student_result
-    pos_examples=['2 HOURS', '4-5 hours']
+    pos_examples=[' 2 HOURS', ' 4-5 hours']
     neg_examples=['5 hours','5 Hours']
     return test_matches(matches,pos_examples,neg_examples)
 
