@@ -25,7 +25,7 @@ def task3_incorrect_regex():
 
 # correct solution
 def task3_correct_regex():
-    return re.compile(r'\b\d+\.\d+(?:\s*-\s*\d+\.\d+)?\s*hours?\b', re.IGNORECASE) 
+    return re.compile(r'\s\b\d+\.\d+(?:\s*-\s*\d+\.\d+)?\s*hours?\b', re.IGNORECASE) 
     #re.compile(r'(?<!\S)\d{1,2}(?:-\d{1,2})?\s*hours?\b', re.IGNORECASE)
 # this will test your feedback - if you are testing for 
 # a wider range of errors, you need more test cases
@@ -66,6 +66,6 @@ def generate_simple_feedback(compiled_expression,positive_test_cases,negative_te
     if pos_match and not(neg_match):
         return(True, "Congratulations! You have correctly completed the regular expression.")
     elif pos_match and neg_match:
-        return(False, f"The student matches too many things. For example you matched {random.choice(incorrectly_matched)} but should not have.")
+        return(False, f'The student matches too many things. For example you matched "{random.choice(incorrectly_matched)}" but should not have.'')
     elif not pos_match:
-        return(False, f"The student does not match the positive cases. For example you did not match {random.choice(unmatched)}.")
+        return(False, f'The student does not match the positive cases. For example you did not match "{random.choice(unmatched)}".')

@@ -74,6 +74,6 @@ def generate_simple_feedback(compiled_expression,positive_test_cases,negative_te
     if over_group:
         return(False, "".join(group_contents))
     elif pos_match and neg_match:
-        return(False, f"The student matches too many things. For example you matched {random.choice(incorrectly_matched)} but should not have.")
+        return(False, f'The student matches too many things. For example you matched "{random.choice(incorrectly_matched)}" but should not have.')
     elif not pos_match:
-        return(False, f"The student does not match the positive cases. For example you did not match {random.choice(unmatched)}.")
+        return(False, f'The student does not match the positive cases. For example you did not match "{random.choice(unmatched)}".')

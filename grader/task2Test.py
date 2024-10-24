@@ -88,9 +88,9 @@ def test_matches(matches,pos_examples,neg_examples):
         # note you cannot return False,[]
         # by construction, as an empty list already returns
         for id in incorrectly_matched:
-            mistakes.append(f'incorrectly detected: {id}')
+            mistakes.append(f'incorrectly detected: "{id}"')
         for om in overmatches:
-            mistakes.append(f'incorrectly matched: {om}')
+            mistakes.append(f'incorrectly matched: "{om}"')
         return False,mistakes
         
     
