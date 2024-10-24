@@ -29,7 +29,9 @@ Recipe 2: 195_Chocolate_Chip_Cookie_Ice_Cream_Cake
 task_id = 4
 
 def task4_correct():
-    decimal_hour_pattern = re.compile(r'\b\d+\.\d+(?:\s*-\s*\d+\.\d+)?\s*hours?\b', re.IGNORECASE)
+
+    decimal_hour_pattern = re.compile(r'\s[0-9]+\.[0-9]+(?:\-[0-9]+\.[0-9]+)?\shours?', re.IGNORECASE)
+    #decimal_hour_pattern = re.compile(r'\b\d+\.\d+(?:\s*-\s*\d+\.\d+)?\s*hours?\b', re.IGNORECASE)
    # re.compile(r'(?<!\S)\d{1,2}(?:-\d{1,2})?\s*hours?\b', re.IGNORECASE)
     #integer_hour_pattern = re.compile(r'hours?', re.IGNORECASE)
     matches = decimal_hour_pattern.findall(recipe_text)
@@ -42,13 +44,6 @@ def task4_incorrect():
  
     return matches 
 
-
-def task4_incorrect_ii():
-
-    integer_hour_pattern = re.compile(r'5 hours', re.IGNORECASE)
-    matches = integer_hour_pattern.findall(recipe_text)
-
-    return matches 
 
 # you shouldn't need to modify this
 def test_task(student_solution):
@@ -66,7 +61,7 @@ def generate_simple_feedback(student_result):
     
     matches = student_result
    
-    pos_examples=['1.5 hours','3.5-4.5 Hours']
+    pos_examples=[' 1.5 hours',' 3.5-4.5 Hours']
     neg_examples=['Overnight','Hour','two','1 hour']
     return test_matches(matches,pos_examples,neg_examples)
 
