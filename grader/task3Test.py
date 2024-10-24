@@ -16,7 +16,7 @@ task_id = 3
 # positive test cases 
 # negative test cases
 
-positive_test_cases=['1.5 hours','3.5-4.5 Hours']
+positive_test_cases=[' 1.5 hours',' 3.5-4.5 Hours']
 negative_test_cases=['Overnight','Hour','two','1 hour']
 # implement both a correct and an incorrect solution
 def task3_incorrect_regex():
@@ -64,8 +64,8 @@ def generate_simple_feedback(compiled_expression,positive_test_cases,negative_te
             incorrectly_matched.append(neg_example)
             
     if pos_match and not(neg_match):
-        return(True, "Congratulations! You have correctly completed the regular expression.")
+        return(True,"Congratulations! You have correctly completed the regular expression.")
     elif pos_match and neg_match:
-        return(False, f'The student matches too many things. For example you matched "{random.choice(incorrectly_matched)}" but should not have.'')
+        return(False, f'The student matches too many things. For example you matched "{random.choice(incorrectly_matched)}" but should not have.')
     elif not pos_match:
         return(False, f'The student does not match the positive cases. For example you did not match "{random.choice(unmatched)}".')
