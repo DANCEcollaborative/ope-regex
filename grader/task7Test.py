@@ -62,6 +62,6 @@ def generate_simple_feedback(compiled_expression,positive_test_cases,negative_te
     if pos_match and not(neg_match):
         return(True, "Congratulations! You have correctly completed the regular expression.")
     elif pos_match and neg_match:
-        return(False, f"'The student matches too many things. For example you matched "{random.choice(incorrectly_matched)}" but should not have.')
+        return(False, f'The student matches too many things. For example you matched "{random.choice(incorrectly_matched)}" but should not have.')
     elif not pos_match:
         return(False, f'The student does not match the positive cases. For example you did not match "{random.choice(unmatched)}".')
