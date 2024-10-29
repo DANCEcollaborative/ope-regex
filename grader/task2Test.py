@@ -77,7 +77,8 @@ def test_matches(matches,pos_examples,neg_examples):
     neg_match = set(neg_examples)
 
     if set(matches)==set(pos_match) and len(set(matches).intersection(set(neg_match)))==0:
-        return True,[]
+        return True,"Correct: you found all the necessary matches, and none that you shouldn't have."
+
     else:
         incorrectly_matched=set(matches)-set(pos_match)
         #not_detected = set(matches).intersection(neg_match)

@@ -82,10 +82,10 @@ def test_matches(processed_recipes):
 
     for recipe,n  in zip(processed_recipes,range(0,len(processed_recipes))):
         if replace_regex_pattern.search(recipe):
-            feedback.append(f'Recipe {n} still contains the target')
+            feedback.append(f'Recipe {n+1} still contains the target')
             is_correct = False
         elif substitute_pattern.search(recipe):
-            feedback.append(f'Recipe {n} correctly modified.')
+            feedback.append(f'Recipe {n+1} correctly modified.')
         else:
             feedback.append('No sub made.')
     return is_correct,feedback
