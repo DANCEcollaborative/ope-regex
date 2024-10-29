@@ -1,34 +1,28 @@
-from test_utility import *
-import numpy as np
 
 import random
 import re 
 import inspect
 
-
-# To update for a new task, you only need to update:
-# task_id
-# positive_test_cases, negative_test_cases
-#
-# task_id = 
-task_id = 3
-
 # positive test cases 
 # negative test cases
 
-positive_test_cases=[' 1.5 hours',' 3.5-4.5 Hours']
-negative_test_cases=['Overnight','Hour','two','1 hour']
-# implement both a correct and an incorrect solution
-def task3_incorrect_regex():
+positive_test_cases=['Recipe 3:','Recipe 99:']
+negative_test_cases=['Recipe by itself',
+                     'Recipe 5 but no colon']
+# task_id = 
+task_id = 6
 
-    return re.compile(r'\s*hours?\b', re.IGNORECASE)
+def apply_student_regex_to_text(student_regex,recipe_text):
 
-# correct solution
-def task3_correct_regex():
-    return re.compile(r'\s\b\d+\.\d+(?:\s*-\s*\d+\.\d+)?\s*hours?\b', re.IGNORECASE) 
-    #re.compile(r'(?<!\S)\d{1,2}(?:-\d{1,2})?\s*hours?\b', re.IGNORECASE)
-# this will test your feedback - if you are testing for 
-# a wider range of errors, you need more test cases
+    srt = re.split(student_regex, recipe_text.strip())
+    return [s for s in srt if s]
+
+def task6_correct():
+    recipe_pattern_lookahead = re.compile(r'(?=Recipe \d+:)')
+    return recipe_pattern_lookahead
+
+def task6_incorrect():
+    return  re.compile(r'Recipe \d+:')
 
 # you shouldn't need to modify thie
 def test_task(student_solution):
@@ -49,22 +43,36 @@ def generate_simple_feedback(compiled_expression,positive_test_cases,negative_te
     #tudents_expression = re.compile(expression)
     pos_match=True
     neg_match=False
+    over_group=False
     
     unmatched=[]
     incorrectly_matched=[]
+    group_contents=[]
     # check correctness 
+
     for pos_example in positive_test_cases:
-        if not(compiled_expression.match(pos_example)):
+        
+        matched_group =compiled_expression.search(pos_example).group()
+        
+        if not(compiled_expression.search(pos_example)):
             pos_match=False
             unmatched.append(pos_example)
             
+        print(matched_group)
+        print(len(matched_group))
+        if len(matched_group)>0:
+            group_contents.append(f'When matching {pos_example} your match is capturing or grouping the characters "{matched_group}". ')
+            over_group=True
+    
     for neg_example in negative_test_cases:
-        if compiled_expression.match(neg_example):
+        if compiled_expression.search(neg_example):
             neg_match=True
-            incorrectly_matched.append(neg_example)
-            
-    if pos_match and not(neg_match):
-        return(True,"Congratulations! You have correctly completed the regular expression.")
+            incorrectly_matched.append(neg_example)    
+        
+    if pos_match and not(neg_match) and not(over_group):
+        return(True, "Congratulations! You have correctly completed the regular expression.")
+    if over_group:
+        return(False, "".join(group_contents))
     elif pos_match and neg_match:
         return(False, f'The student matches too many things. For example you matched "{random.choice(incorrectly_matched)}" but should not have.')
     elif not pos_match:

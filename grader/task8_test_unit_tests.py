@@ -1,8 +1,7 @@
 # function to test the test code
 
 #import task1Test
-from task2Test import * 
-
+from task8Test import * 
 
 def main():
 
@@ -12,13 +11,15 @@ def main():
     # compile regular expression object?
 
     print("This is the main function.")
-    simple_feedback = test_task(task2_correct)
+
+    
     print('tested with correct solution:')
+    simple_feedback = test_task(task8_correct)
     print(simple_feedback)
-
-    simple_feedback = test_task(task2_incorrect)
+    
     print('tested with incorrect solution:')
+    simple_feedback = test_task(task8_incorrect)
     print(simple_feedback)
-
+   
 if __name__ == "__main__":
     main()

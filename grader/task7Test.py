@@ -11,24 +11,20 @@ import inspect
 # positive_test_cases, negative_test_cases
 #
 # task_id = 
-task_id = 3
+task_id = 7
 
 # positive test cases 
 # negative test cases
 
-positive_test_cases=[' 1.5 hours',' 3.5-4.5 Hours']
-negative_test_cases=['Overnight','Hour','two','1 hour']
+positive_test_cases=['2 hours','TWO Hours']
+negative_test_cases=['too hous','5 hours','Overnight','Hour','two','1 hour']
 # implement both a correct and an incorrect solution
-def task3_incorrect_regex():
-
+def task7_incorrect_regex():
     return re.compile(r'\s*hours?\b', re.IGNORECASE)
 
 # correct solution
-def task3_correct_regex():
-    return re.compile(r'\s\b\d+\.\d+(?:\s*-\s*\d+\.\d+)?\s*hours?\b', re.IGNORECASE) 
-    #re.compile(r'(?<!\S)\d{1,2}(?:-\d{1,2})?\s*hours?\b', re.IGNORECASE)
-# this will test your feedback - if you are testing for 
-# a wider range of errors, you need more test cases
+def task7_correct_regex():
+    return re.compile(r'two hours|2 hours',re.IGNORECASE)
 
 # you shouldn't need to modify thie
 def test_task(student_solution):
@@ -64,7 +60,7 @@ def generate_simple_feedback(compiled_expression,positive_test_cases,negative_te
             incorrectly_matched.append(neg_example)
             
     if pos_match and not(neg_match):
-        return(True,"Congratulations! You have correctly completed the regular expression.")
+        return(True, "Congratulations! You have correctly completed the regular expression.")
     elif pos_match and neg_match:
         return(False, f'The student matches too many things. For example you matched "{random.choice(incorrectly_matched)}" but should not have.')
     elif not pos_match:
