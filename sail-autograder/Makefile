@@ -1,4 +1,4 @@
-PROJECT_ID=ope-author-practice-xvjlkkm3
+PROJECT_ID=ope-author-regular-ex-mt8s2z4c
 TASK_ID=a6802abd-e9ad-48aa-934c-0b35ce1e320a
 LMS_NAME=sail2
 COURSE_TYPE=foundation-data-science

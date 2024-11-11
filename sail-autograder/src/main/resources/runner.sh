@@ -36,7 +36,23 @@ task4() {
   python3 print_result.py task4
 }
 
-declare -ar questions=( "task1" "task2" "task3" "task4" )
+task5() {
+  python3 print_result.py task5
+}
+
+task6() {
+  python3 print_result.py task6
+}
+
+task7() {
+  python3 print_result.py task7
+}
+
+task8() {
+  python3 print_result.py task8
+}
+
+declare -ar questions=( "task1" "task2" "task3" "task4" "task5" "task6" "task7" "task8" )
 
 ################################################################################
 ##                    DO NOT MODIFY ANYTHING BELOW                            ##
