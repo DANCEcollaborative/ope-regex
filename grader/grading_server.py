@@ -18,6 +18,8 @@ logger = logging.getLogger(__name__)
 class LocalGradingService(grading_pb2_grpc.GraderServicer):
   def __init__(self) -> None:
     super().__init__()
+    # there is one local grader object which calls into
+    # task specific test cases
     self.localGrader = local_grader.LocalGrader()
     self.ope_session_name = os.getenv("OPE_SESSION_NAME")
     self.namespace = os.getenv("OPE_SESSION_NAMESPACE")
@@ -35,11 +37,25 @@ class LocalGradingService(grading_pb2_grpc.GraderServicer):
     pass_task, feedback = self.localGrader.grade(task, fn)
     logger.debug(f'[DEBUG][LocalGradingService]: result is {pass_task}. Feedback is {feedback}')
     if pass_task:
+      # send response to bot and students
+      # that task status is pass
       logger.debug(f'[DEBUG][LocalGradingService-->Proxy]: Call Complete {self.ope_session_name}/{task}')
       utils.complete(session_name=self.ope_session_name, task=task)
     return grading_pb2.Response(response=feedback)
 
+  def getPostQuizToken(self, submission_username, submission_password):
+      url = f"https://management.sailplatform.org/api/ope/get_token/ope-learn-phase2-mys-6nigsxlh/postquiz/{submission_username}"
+      response = requests.get(url)
+    
+      if response.status_code == 200:
+          token = response.text
+          return token
+      else:
+          return ""
+
   def Submit(self, request, context):
+    # iterate through each student in session
+    # and make a submission for that student to AGS (which will submit to SAIL())
     url = f'https://ope.sailplatform.org/api/v1/getSubmissionInfo/{self.namespace}/{self.ope_session_name}'
     response = requests.get(url)
     participantList = json.loads(response.content.decode('utf-8'))
@@ -54,6 +70,7 @@ class LocalGradingService(grading_pb2_grpc.GraderServicer):
     return grading_pb2.Response(response=resp)
 
   def Release(self, request, context):
+    # release next task to Jupyter Notebook
     task = request.task
     logger.debug(f'[DEBUG][LocalGradingService]: call release {task}')
     grading_utils.release(task=task)
