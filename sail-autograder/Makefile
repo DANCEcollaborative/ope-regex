@@ -1,9 +1,9 @@
-PROJECT_ID=ope-learn-regular-ex-dtmc1pau
+PROJECT_ID=ope-author-regular-ex-mt8s2z4c
 TASK_ID=f979cfa9-40d6-4138-bfe6-52bf25da7e6e
 LMS_NAME=sail2
 COURSE_TYPE=PPP
 ARTIFACT_VERSION=v1
-IMAGE_NAME=graders.azurecr.io/grader/$(LMS_NAME)/$(PROJECT_ID)/$(TASK_ID)
+IMAGE_NAME=graders.azurecr.io/grader/$(LMS_NAME)/$(COURSE_TYPE)/$(PROJECT_ID)/$(TASK_ID)
 MAINCLASS = edu.cmu.scs.cc.project.example.Grader
 
 #################
