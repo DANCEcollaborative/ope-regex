@@ -5,13 +5,13 @@ from test_utility import write_encrypted_result
 
 # Submission Specific Config
 LMS_NAME = "sail2"
-PROJECT_ID = "ope-author-practice-xvjlkkm3"
-PROJECT_LEARN_ID = "pe-learn-practice-p032vbfd"
-TASK_ID = "a6802abd-e9ad-48aa-934c-0b35ce1e320a"
-SECRET_KEY = "AK8e97WS3M8ETW6akTBJ9D"
+PROJECT_ID = "ope-author-regular-ex-mt8s2z4c"
+PROJECT_LEARN_ID = "ope-learn-regular-ex-dtmc1pau"
+TASK_ID = "f979cfa9-40d6-4138-bfe6-52bf25da7e6e"
+SECRET_KEY = ""
 ARTIFACT_VERSION = "v1"
-DURATION = 50
-COURSE_TYPE = "foundation-data-science"
+DURATION = 90
+COURSE_TYPE = "PPP"
 
 STUDENT_DNS = requests.get("https://ipinfo.io/ip").text
 AGS_DNS = "autograding.sailplatform.org"
