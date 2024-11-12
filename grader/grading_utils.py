@@ -1,5 +1,4 @@
 import nbformat as nbf
-import json
 
 def is_task_n(task: str):
   def is_target_task(cell):
@@ -50,22 +49,8 @@ def release(task: str):
   for cell in source_nb.cells:
     if is_dev_cell(cell):
       continue
-    target_nb.cells.extend(source_nb.cells)
+    target_nb.cells.append(cell)
 
   # Write the combined notebook back to the first file
   with open(target_path, 'w') as f:
     nbf.write(target_nb, f)
-
-def save_code(code, filename):
-  with open(filename, "w") as f:
-    f.write(code)
-
-def read_test_json(task: str, status_file):
-  is_test_passed = False
-  with open(status_file) as f:
-    for line in f:
-      obj = json.loads(line)
-      if "Pass" in obj and obj["Testcase"] == int(task[-1]) and obj["Pass"]:
-        is_test_passed = True
-        break
-  return is_test_passed
