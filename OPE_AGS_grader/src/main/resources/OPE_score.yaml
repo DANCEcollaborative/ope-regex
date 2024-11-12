@@ -1,0 +1,48 @@
+# This is the reference answer for OPE score
+
+---
+metadata:
+  secret_data: False
+  student_output: "result.json"
+
+questions:
+  - id: task1
+    type: String
+    answer: passed
+    score: 1
+    scoreType: Number
+  - id: task2
+    type: String
+    answer: passed
+    score: 1
+    scoreType: Number
+  - id: task3
+    type: String
+    answer: passed
+    score: 1
+    scoreType: Number
+  - id: task4
+    type: String
+    answer: passed
+    score: 1
+    scoreType: Number
+  - id: task5
+    type: String
+    answer: passed
+    score: 1
+    scoreType: Number
+  - id: task6
+    type: String
+    answer: passed
+    score: 1
+    scoreType: Number
+  - id: task7
+    type: String
+    answer: passed
+    score: 1
+    scoreType: Number
+  - id: task8
+    type: String
+    answer: passed
+    score: 1
+    scoreType: Number

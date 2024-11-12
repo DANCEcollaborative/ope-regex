@@ -11,7 +11,7 @@ TASK_ID = "f979cfa9-40d6-4138-bfe6-52bf25da7e6e"
 SECRET_KEY = ""
 ARTIFACT_VERSION = "v1"
 DURATION = 90
-COURSE_TYPE = "PPP"
+COURSE_TYPE = "ppp"
 
 STUDENT_DNS = requests.get("https://ipinfo.io/ip").text
 AGS_DNS = "autograding.sailplatform.org"
