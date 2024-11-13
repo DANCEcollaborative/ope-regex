@@ -79,12 +79,16 @@ def test_matches(matches,pos_examples,neg_examples):
     if set(matches)==set(pos_match) and len(set(matches).intersection(set(neg_match)))==0:
         return True,"Correct: you found all the necessary matches, and none that you shouldn't have."
     else:
+        num_match = len(matches)
+        mistakes=[] # list of mismatches
+        mistakes.append(f'You found a total of {num_match} matches: the list was {matches}.')
+
         incorrectly_matched=set(matches)-set(pos_match)
         #not_detected = set(matches).intersection(neg_match)
         
         overmatches = set(matches).intersection(neg_examples)
 
-        mistakes=[] # list of mismatches
+
         # note you cannot return False,[]
         # by construction, as an empty list already returns
         for id in incorrectly_matched:
