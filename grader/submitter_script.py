@@ -1,7 +1,7 @@
 import requests, json, os
 import tarfile
 from operator import itemgetter
-from test_utility import write_encrypted_result
+from test_utility import write_result
 
 # Submission Specific Config
 LMS_NAME = "sail2"
@@ -39,7 +39,7 @@ def submit(username, password, result):
 	tar_filename = f"{username}.tar.gz"
 
 	# generate the result json file
-	write_encrypted_result(result, RESULT_FILENAME)
+	write_result(result, RESULT_FILENAME)
 
 	# add the result json file and workspace notebook
 	# to a submission tar
@@ -62,4 +62,3 @@ def submit(username, password, result):
 	# delete the submission files
 	os.remove(RESULT_FILENAME)
 	os.remove(tar_filename)
-
