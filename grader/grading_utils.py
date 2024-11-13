@@ -55,3 +55,17 @@ def release(task: str):
   # Write the combined notebook back to the first file
   with open(target_path, 'w') as f:
     nbf.write(target_nb, f)
+
+def save_code(code, filename):
+  with open(filename, "w") as f:
+    f.write(code)
+
+def read_test_json(task: str, status_file):
+  is_test_passed = False
+  with open(status_file) as f:
+    for line in f:
+      obj = json.loads(line)
+      if "Pass" in obj and obj["Testcase"] == int(task[-1]) and obj["Pass"]:
+        is_test_passed = True
+        break
+  return is_test_passed
