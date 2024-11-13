@@ -88,5 +88,6 @@ def test_matches(processed_recipes):
             feedback.append(f'Recipe {n+1} correctly modified.')
         else:
             feedback.append('No sub made.')
+            is_correct = False
     return is_correct,feedback
     
