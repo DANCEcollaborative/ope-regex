@@ -17,7 +17,7 @@ Recipe 2: 195_Chocolate_Chip_Cookie_Ice_Cream_Cake
 2) Combine crumbs with melted margarine and press into the bottom of a 9-inch springform pan or pie plate.
 3) Stand remaining cookies around edge of pan.
 4) Spread 3/4 cup fudge topping over crust.
-5) Freeze 1.5 hours.
+5) Freeze two hours.
 6) Meanwhile, soften 1 quart of ice cream in microwave or on countertop.
 7) After crust has chilled, spread softened ice cream over fudge layer.
 8) Freeze 30 minutes.
@@ -88,5 +88,6 @@ def test_matches(processed_recipes):
             feedback.append(f'Recipe {n+1} correctly modified.')
         else:
             feedback.append('No sub made.')
+            is_correct = False
     return is_correct,feedback
     
