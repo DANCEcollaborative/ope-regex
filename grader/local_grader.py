@@ -39,11 +39,11 @@ class LocalGrader:
     passed, feedback_message = test_function(student_function)
     feedback = Feedback(int(passed), feedback_message)
     self.feedbacks[task] = feedback
-    self.result[task] = int(passed)
-#     if passed:
-#       self.result[task] = "passed"
-#     else:
-#       self.result[task] = "failed"
+    # self.result[task] = int(passed)
+    if passed:
+      self.result[task] = "passed"
+    else:
+      self.result[task] = "failed"
     return passed, str(feedback)
 
   def submit(self, username: str, password: str)  -> None:
