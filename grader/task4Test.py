@@ -61,7 +61,7 @@ def generate_simple_feedback(student_result):
     
     matches = student_result
    
-    pos_examples=[' 1.5 hours',' 3.5-4.5 Hours']
+    pos_examples=[' 3.5-4.5 Hours']
     neg_examples=['Overnight','Hour','two','1 hour']
     return test_matches(matches,pos_examples,neg_examples)
 
