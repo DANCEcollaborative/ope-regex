@@ -40,19 +40,19 @@ class LocalGrader:
     feedback = Feedback(int(passed), feedback_message)
     self.feedbacks[task] = feedback
     self.result[task] = int(passed)
-    if passed:
-      self.result[task] = "passed"
-    else:
-      self.result[task] = "failed"
+#     if passed:
+#       self.result[task] = "passed"
+#     else:
+#       self.result[task] = "failed"
     return passed, str(feedback)
 
   def submit(self, username: str, password: str)  -> None:
-    for task in self.result.keys():
-      passed = utils.read_test_json(task, "tests.json")
-      if passed:
-        self.result[task] = "passed"
-      else:
-        self.result[task] = "failed"
+#     for task in self.result.keys():
+#       passed = utils.read_test_json(task, "tests.json")
+#       if passed:
+#         self.result[task] = "passed"
+#       else:
+#         self.result[task] = "failed"
     submitter_script.submit(username, password, self.result)
 
 if __name__ == '__main__':
