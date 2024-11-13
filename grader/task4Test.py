@@ -77,9 +77,9 @@ def test_matches(matches,pos_examples,neg_examples):
     neg_match = set(neg_examples)
 
     augmented_feedback=[]
-    augmented_feedback.append(f'You matched: {matches}, you were'\
-        f' trying to match positive examples such as: {pos_examples}, and you should have' \
-            f' matched none of the negative examples : {neg_examples}.')
+    #augmented_feedback.append(f'You matched: {matches}, you were'\
+    #    f' trying to match positive examples such as: {pos_examples}, and you should have' \
+    #        f' matched none of the negative examples : {neg_examples}.')
 
     if set(matches)==set(pos_match) and len(set(matches).intersection(set(neg_match)))==0:
         augmented_feedback.append("Correct: you found all the necessary matches, and none that you shouldn't have.")
@@ -87,12 +87,11 @@ def test_matches(matches,pos_examples,neg_examples):
     
     else:
         num_match = len(matches)
-      
+
         augmented_feedback.append(f'You found a total of {num_match} matches: the list was {matches}.')
         incorrectly_matched=set(matches)-set(pos_match)
         
         overmatches = set(matches).intersection(neg_examples)
-
 
         # note you cannot return False,[]
         # by construction, as an empty list already returns
