@@ -136,3 +136,12 @@ def write_encrypted_result(result, filename):
 	encrypted_result = fernet.encrypt(result.encode())
 	with open(filename, "wb") as f:
 		f.write(encrypted_result)
+
+def write_result(result, filename):
+	"""
+	Write the result JSON 
+	"""
+	result = json.dumps(result)
+	with open(filename, "w") as f:
+		f.write(result)
+

@@ -1,0 +1,92 @@
+
+task1: FAILED
+Your answer	(Length: 6):	failed
+Reference answer(Length: 6):	passed
+task2: PASSED
+task3: PASSED
+Total: 2/3 questions passed!
+[INFO] Elapsed Time:	0 s
+
+Your score: 3.00/5.00
+
+task1: FAILED
+Your answer	(Length: 6):	failed
+Reference answer(Length: 6):	passed
+task2: PASSED
+task3: PASSED
+Total: 2/3 questions passed!
+[INFO] Elapsed Time:	0 s
+
+Your score: 3.00/5.00
+
+task1: FAILED
+Your answer	(Length: 6):	failed
+Reference answer(Length: 6):	passed
+task2: PASSED
+task3: PASSED
+Total: 2/3 questions passed!
+[INFO] Elapsed Time:	0 s
+
+Your score: 3.00/5.00
+
+task1: FAILED
+Your answer	(Length: 6):	failed
+Reference answer(Length: 6):	passed
+task2: PASSED
+task3: PASSED
+Total: 2/3 questions passed!
+[INFO] Elapsed Time:	0 s
+
+Your score: 3.00/5.00
+
+task1: FAILED
+Your answer	(Length: 6):	failed
+Reference answer(Length: 6):	passed
+task2: PASSED
+task3: PASSED
+Total: 2/3 questions passed!
+[INFO] Elapsed Time:	0 s
+
+Your score: 3.00/5.00
+
+task1: FAILED
+Your answer	(Length: 6):	failed
+Reference answer(Length: 6):	passed
+task2: PASSED
+task3: PASSED
+Total: 2/3 questions passed!
+[INFO] Elapsed Time:	0 s
+
+Your score: 3.00/5.00
+
+Your answer is malformed. Follow the standard output format strictly.
+Exception:	/Users/cbogart/Dropbox/research/sail/grader/ope-regex/OPE_AGS_grader/src/test/resources/fail/result.json (No such file or directory)
+task1: PASSED
+task2: FAILED
+Your answer	(Length: 6):	failed
+Reference answer(Length: 6):	passed
+task3: PASSED
+task4: PASSED
+task5: PASSED
+task6: PASSED
+task7: PASSED
+task8: PASSED
+Total: 7/8 questions passed!
+[INFO] Elapsed Time:	0 s
+
+Your score: 7.00/8.00
+
+task1: PASSED
+task2: FAILED
+Your answer	(Length: 6):	failed
+Reference answer(Length: 6):	passed
+task3: PASSED
+task4: PASSED
+task5: PASSED
+task6: PASSED
+task7: PASSED
+task8: PASSED
+Total: 7/8 questions passed!
+[INFO] Elapsed Time:	0 s
+
+Your score: 7.00/8.00

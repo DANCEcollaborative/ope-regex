@@ -1,6 +1,8 @@
 import math
-import utils
+# import utils
+import grading_utils as utils
 import task1Test, task2Test, task3Test, task4Test, task5Test, task6Test, task7Test, task8Test
+import time
 import submitter_script
 from typing import Tuple
 
@@ -37,12 +39,21 @@ class LocalGrader:
     passed, feedback_message = test_function(student_function)
     feedback = Feedback(int(passed), feedback_message)
     self.feedbacks[task] = feedback
-    self.result[task] = int(passed)
+    # self.result[task] = int(passed)
+    if passed:
+      self.result[task] = "passed"
+    else:
+      self.result[task] = "failed"
     return passed, str(feedback)
 
   def submit(self, username: str, password: str)  -> None:
+#     for task in self.result.keys():
+#       passed = utils.read_test_json(task, "tests.json")
+#       if passed:
+#         self.result[task] = "passed"
+#       else:
+#         self.result[task] = "failed"
     submitter_script.submit(username, password, self.result)
-
 
 if __name__ == '__main__':
   grader = LocalGrader()
