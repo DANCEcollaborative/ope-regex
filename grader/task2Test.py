@@ -59,7 +59,10 @@ def generate_simple_feedback(student_result):
     and generating some simple feedback if they failed
 
     '''
-    
+    if student_result is None:
+        augmented_feedback=[]
+        return False," ".join(augmented_feedback)
+
     matches = student_result
     pos_examples=[' 2 HOURS', ' 4-5 hours']
     neg_examples=['5 hours','5 Hours']
