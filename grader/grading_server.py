@@ -43,15 +43,15 @@ class LocalGradingService(grading_pb2_grpc.GraderServicer):
     url = f'https://ope.sailplatform.org/api/v1/getSubmissionInfo/{self.namespace}/{self.ope_session_name}'
     response = requests.get(url)
     participantList = json.loads(response.content.decode('utf-8'))
-    # resp = ''
-    resp = 'Submission successful. Thank you.'
+    resp = ''
+    # resp = 'Submission successful. Thank you.'
     for participant in participantList:
       submission_username = participant.get('email', '')
       submission_password = participant.get('password', '')
       postQuizToken = participant.get('postQuizToken', '')
       logger.debug(f'[DEBUG][Submission]: Submit {submission_username}/{submission_password}')
       self.localGrader.submit(submission_username, submission_password)
-      # resp += f'Post Quiz Token for {submission_username} is {postQuizToken}\n'
+      resp += f'Post Quiz Token for {submission_username} is {postQuizToken}\n'
     return grading_pb2.Response(response=resp)
 
   def Release(self, request, context):
